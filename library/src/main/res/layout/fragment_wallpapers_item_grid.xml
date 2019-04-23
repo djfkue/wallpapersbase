@@ -27,8 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            app:heightRatio="1"
-            app:widthRatio="1"/>
+            app:heightRatio="16"
+            app:widthRatio="12"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,7 +56,8 @@
                     android:textSize="@dimen/text_content"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    fontPath="fonts/Font-Medium.ttf"/>
+                    fontPath="fonts/Font-Medium.ttf"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/author"
