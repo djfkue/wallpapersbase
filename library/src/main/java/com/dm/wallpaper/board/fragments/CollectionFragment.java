@@ -3,6 +3,7 @@ package com.dm.wallpaper.board.fragments;
 import android.animation.AnimatorInflater;
 import android.animation.StateListAnimator;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -327,7 +328,9 @@ public class CollectionFragment extends Fragment {
             }
 
             Drawable drawable = DrawableHelper.get(getActivity(), mCollection.get(position).getIcon());
-            return DrawableHelper.getTintedDrawable(drawable, color);
+            drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+//            return DrawableHelper.getTintedDrawable(drawable, color);
+            return drawable;
         }
     }
 }

@@ -45,7 +45,7 @@ public class HeaderView extends AppCompatImageView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        double height = (widthMeasureSpec/mWidthRatio) * mHeightRatio;
+        double height = (getMeasuredWidth()/mWidthRatio) * mHeightRatio;
         setMeasuredDimension(widthMeasureSpec, Double.valueOf(height).intValue());
     }
 
