@@ -3,46 +3,10 @@
 			"name": "Pink"
 		},
 		{
-			"name": "People"
-		},
-		{
-			"name": "Architecture"
-		},
-		{
-			"name": "City"
-		},
-		{
-			"name": "Mountain"
-		},
-		{
-			"name": "Forest"
-		},
-		{
-			"name": "Sunset"
-		},
-		{
-			"name": "Nature"
-		},
-		{
-			"name": "Satellite"
-		},
-		{
 			"name": "Animal"
 		},
 		{
-			"name": "Ocean"
-		},
-		{
-			"name": "Beach"
-		},
-		{
-			"name": "Road"
-		},
-		{
-			"name": "Black and White"
-		},
-		{
-			"name": "House"
+			"name": "Happy"
 		}
 	],
 
@@ -318,6 +282,174 @@
 			"thumbUrl": "https://live.staticflickr.com/65535/46924901214_80b291145b_z_d.jpg",
 			"name": "161939",
 			"category": "pink"
+		},
+		{
+			"author": "Cats Wallpaper",
+			"url": "https://live.staticflickr.com/65535/40751982123_98a0c2459f_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/40751982123_0318030721_z_d.jpg",
+			"name": "5c0a0d5a20b91",
+			"category": "Animal"
+		},
+		{
+			"author": "Cats Wallpaper",
+			"url": "https://live.staticflickr.com/65535/40751972083_f97eef85e0_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/40751972083_928891eff9_z_d.jpg",
+			"name": "5c0a0d5c32f3c",
+			"category": "Animal"
+		},
+		{
+			"author": "Cats Wallpaper",
+			"url": "https://live.staticflickr.com/65535/40751972003_4abacce6c7_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/40751972003_b5f7a6653e_z_d.jpg",
+			"name": "5c0a0d5d55e0a",
+			"category": "Animal"
+		},
+		{
+			"author": "Cats Wallpaper",
+			"url": "https://live.staticflickr.com/65535/46801961335_3c76b92377_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/46801961335_6b24267c81_z_d.jpg",
+			"name": "5c0a0d55e328e",
+			"category": "Animal"
+		},
+		{
+			"author": "Cats Wallpaper",
+			"url": "https://live.staticflickr.com/65535/47718288681_32150be901_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/47718288681_260d611280_z_d.jpg",
+			"name": "5c0a0d570d8a4",
+			"category": "Animal"
+		},
+		{
+			"author": "Cats Wallpaper",
+			"url": "https://live.staticflickr.com/65535/32775087787_0938016449_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/32775087787_776db5de33_z_d.jpg",
+			"name": "5c0a0d5496d70",
+			"category": "Animal"
+		},
+		{
+			"author": "Cats Wallpaper",
+			"url": "https://live.staticflickr.com/65535/46801951885_123c1556ae_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/46801951885_39c47e974b_z_d.jpg",
+			"name": "5c0a0d5808b64",
+			"category": "Animal"
+		},
+		{
+			"author": "Cats Wallpaper",
+			"url": "https://live.staticflickr.com/65535/47665376792_7ce89c5bbc_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/47665376792_ec4ebc4160_z_d.jpg",
+			"name": "5c1c963accce0",
+			"category": "Animal"
+		},
+		{
+			"author": "Cats Wallpaper",
+			"url": "https://live.staticflickr.com/65535/40751950523_384a1ebda2_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/40751950523_5c204e726b_z_d.jpg",
+			"name": "5c1c963e12175",
+			"category": "Animal"
+		},
+		{
+			"author": "Cats Wallpaper",
+			"url": "https://live.staticflickr.com/65535/46801934965_d1c8c00c1d_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/46801934965_cef01d925a_z_d.jpg",
+			"name": "5c1c9632e0871",
+			"category": "Animal"
+		},
+		{
+			"author": "Cats Wallpaper",
+			"url": "https://live.staticflickr.com/65535/46801932955_977720cbd6_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/46801932955_a9f38e2260_z_d.jpg",
+			"name": "5c1c96377aafd",
+			"category": "Animal"
+		},
+		{
+			"author": "Cats Wallpaper",
+			"url": "https://live.staticflickr.com/65535/46801978905_26e11815bc_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/46801978905_605f3d5ac7_z_d.jpg",
+			"name": "5c0a0d5b28b49",
+			"category": "Animal"
+		},
+		{
+			"author": "Be Happy",
+			"url": "https://live.staticflickr.com/65535/47718062951_0e888fa25e_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/47718062951_aa92ccdd81_z_d.jpg",
+			"name": "379706",
+			"category": "Happy"
+		},
+		{
+			"author": "Be Happy",
+			"url": "https://live.staticflickr.com/65535/32774827427_3e7ce86626_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/32774827427_4d96b79a78_z_d.jpg",
+			"name": "94787",
+			"category": "Happy"
+		},
+		{
+			"author": "Be Happy",
+			"url": "https://live.staticflickr.com/65535/47718064391_efb1442ce3_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/47718064391_df1060abe8_z_d.jpg",
+			"name": "379701",
+			"category": "Happy"
+		},
+		{
+			"author": "Be Happy",
+			"url": "https://live.staticflickr.com/65535/46801712875_7e6769dd53_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/46801712875_5c3ab3a3a9_z_d.jpg",
+			"name": "94785",
+			"category": "Happy"
+		},
+		{
+			"author": "Be Happy",
+			"url": "https://live.staticflickr.com/65535/40751708503_4de1d8bf98_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/40751708503_61bc763ea4_z_d.jpg",
+			"name": "94783",
+			"category": "Happy"
+		},
+		{
+			"author": "Be Happy",
+			"url": "https://live.staticflickr.com/65535/46801713505_5eea58f93c_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/46801713505_bfa25cdce1_z_d.jpg",
+			"name": "94782",
+			"category": "Happy"
+		},
+		{
+			"author": "Be Happy",
+			"url": "https://live.staticflickr.com/65535/40751709323_92e2f62763_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/40751709323_1921e90afd_z_d.jpg",
+			"name": "94780",
+			"category": "Happy"
+		},
+		{
+			"author": "Be Happy",
+			"url": "https://live.staticflickr.com/65535/46801714625_0a7eab6648_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/46801714625_336fcbdf61_z_d.jpg",
+			"name": "94778",
+			"category": "Happy"
+		},
+		{
+			"author": "Be Happy",
+			"url": "https://live.staticflickr.com/65535/47665158732_cf3a0b3068_o_d.png",
+			"thumbUrl": "https://live.staticflickr.com/65535/47665158732_2c74865c1d_z_d.jpg",
+			"name": "94760",
+			"category": "Happy"
+		},
+		{
+			"author": "Be Happy",
+			"url": "https://live.staticflickr.com/65535/47665159022_facc6c5c95_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/47665159022_09c57d46a2_z_d.jpg",
+			"name": "94758",
+			"category": "Happy"
+		},
+		{
+			"author": "Be Happy",
+			"url": "https://live.staticflickr.com/65535/47718085991_9d4b58d59c_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/47718085991_bdb2eb44a6_z_d.jpg",
+			"name": "94753",
+			"category": "Happy"
+		},
+		{
+			"author": "Be Happy",
+			"url": "https://live.staticflickr.com/65535/40751821873_0237a8ab73_o_d.jpg",
+			"thumbUrl": "https://live.staticflickr.com/65535/40751821873_aaa8e4cacf_z_d.jpg",
+			"name": "94747",
+			"category": "Happy"
 		}
 	]
 }
