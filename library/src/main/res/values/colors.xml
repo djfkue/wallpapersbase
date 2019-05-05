@@ -62,4 +62,7 @@
     <!-- Browser -->
     <color name="browserWindowBackground">#9F000000</color>
 
+    <!-- Dialog -->
+    <color name="dialog_negative">#FFFFFF</color>
+
 </resources>
