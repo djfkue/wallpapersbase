@@ -194,4 +194,6 @@
     <string name="txt_open">Open</string>
     <string name="txt_close">Close</string>
 
+    <string name="rate_hint">Thanks for five stars rating!</string>
+
 </resources>

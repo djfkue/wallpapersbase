@@ -3,21 +3,26 @@ package com.dm.wallpaper.board.tasks;
 import android.app.Activity;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.RectF;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatRatingBar;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.danimahardhika.android.helpers.core.ColorHelper;
 import com.danimahardhika.android.helpers.core.WindowHelper;
+import com.danimahardhika.android.helpers.core.utils.LogUtil;
 import com.danimahardhika.cafebar.CafeBar;
 import com.danimahardhika.cafebar.CafeBarTheme;
 import com.dm.wallpaper.board.R;
@@ -26,7 +31,6 @@ import com.dm.wallpaper.board.helpers.WallpaperHelper;
 import com.dm.wallpaper.board.items.Wallpaper;
 import com.dm.wallpaper.board.preferences.Preferences;
 import com.dm.wallpaper.board.utils.ImageConfig;
-import com.danimahardhika.android.helpers.core.utils.LogUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 
@@ -52,7 +56,7 @@ import java.util.concurrent.Executor;
  * limitations under the License.
  */
 
-public class WallpaperApplyTask extends AsyncTask<Void, Void, Boolean> implements WallpaperPropertiesLoaderTask.Callback{
+public class WallpaperApplyTask extends AsyncTask<Void, Void, Boolean> implements WallpaperPropertiesLoaderTask.Callback {
 
     private final WeakReference<Context> mContext;
     private Apply mApply;
@@ -165,7 +169,7 @@ public class WallpaperApplyTask extends AsyncTask<Void, Void, Boolean> implement
                 Thread.sleep(1);
                 ImageSize imageSize = WallpaperHelper.getTargetSize(mContext.get());
 
-                LogUtil.d("original rectF: " +mRectF);
+                LogUtil.d("original rectF: " + mRectF);
 
                 if (mRectF != null && Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
                     Point point = WindowHelper.getScreenSize(mContext.get());
@@ -180,13 +184,13 @@ public class WallpaperApplyTask extends AsyncTask<Void, Void, Boolean> implement
                      */
                     float widthScaleFactor = (float) imageSize.getHeight() / (float) mWallpaper.getDimensions().getHeight();
 
-                    float side = ((float) mWallpaper.getDimensions().getWidth() * widthScaleFactor - (float) imageSize.getWidth())/2f;
+                    float side = ((float) mWallpaper.getDimensions().getWidth() * widthScaleFactor - (float) imageSize.getWidth()) / 2f;
                     float leftRectF = 0f - side;
                     float rightRectF = (float) mWallpaper.getDimensions().getWidth() * widthScaleFactor - side;
                     float topRectF = 0f;
                     float bottomRectF = (float) imageSize.getHeight();
                     mRectF = new RectF(leftRectF, topRectF, rightRectF, bottomRectF);
-                    LogUtil.d("created center crop rectF: " +mRectF);
+                    LogUtil.d("created center crop rectF: " + mRectF);
                 }
 
                 ImageSize adjustedSize = imageSize;
@@ -254,7 +258,7 @@ public class WallpaperApplyTask extends AsyncTask<Void, Void, Boolean> implement
 
                             Bitmap bitmap = loadedBitmap;
                             if (Preferences.get(mContext.get()).isCropWallpaper() && adjustedRectF != null) {
-                                LogUtil.d("rectF: " +adjustedRectF);
+                                LogUtil.d("rectF: " + adjustedRectF);
                                 /*
                                  * Cropping bitmap
                                  */
@@ -393,10 +397,39 @@ public class WallpaperApplyTask extends AsyncTask<Void, Void, Boolean> implement
                     .fitSystemWindow()
                     .content(R.string.wallpaper_applied)
                     .show();
+            showRatingDialog();
         } else {
             Toast.makeText(mContext.get(), R.string.wallpaper_apply_failed,
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void showRatingDialog() {
+        final MaterialDialog.Builder builder = new MaterialDialog.Builder(mContext.get());
+        builder.widgetColor(ColorHelper.getAttributeColor(mContext.get(), R.attr.colorAccent))
+                .typeface(TypefaceHelper.getMedium(mContext.get()), TypefaceHelper.getRegular(mContext.get()))
+                .cancelable(true)
+                .customView(R.layout.dialog_customer_rating, true)
+                .title(R.string.rate_hint)
+                .negativeColor(Color.WHITE)
+                .negativeText(android.R.string.cancel)
+                .onNegative((dialog, which) -> {
+                    cancel(true);
+                })
+                .positiveColor(ColorHelper.getAttributeColor(mContext.get(), R.attr.colorAccent))
+                .positiveText(android.R.string.ok)
+                .onPositive((dialog, which) -> {
+                    AppCompatRatingBar ratingBar = dialog.getCustomView().findViewById(R.id.item_rating_bar);
+                    Log.d("cw", "ratingBar = " + ratingBar.getRating());
+                    if (ratingBar.getRating() > 4.0) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+                                "https://play.google.com/store/apps/details?id=" + mContext.get().getPackageName()));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+                        mContext.get().startActivity(intent);
+                    }
+                    cancel(true);
+                });
+        builder.build().show();
     }
 
     public enum Apply {
