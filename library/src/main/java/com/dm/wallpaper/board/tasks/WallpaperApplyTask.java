@@ -405,6 +405,9 @@ public class WallpaperApplyTask extends AsyncTask<Void, Void, Boolean> implement
     }
 
     private void showRatingDialog() {
+        if (!Preferences.get(mContext.get()).showRatingHint()) {
+            return;
+        }
         final MaterialDialog.Builder builder = new MaterialDialog.Builder(mContext.get());
         builder.widgetColor(ColorHelper.getAttributeColor(mContext.get(), R.attr.colorAccent))
                 .typeface(TypefaceHelper.getMedium(mContext.get()), TypefaceHelper.getRegular(mContext.get()))
@@ -426,6 +429,8 @@ public class WallpaperApplyTask extends AsyncTask<Void, Void, Boolean> implement
                                 "https://play.google.com/store/apps/details?id=" + mContext.get().getPackageName()));
                         intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
                         mContext.get().startActivity(intent);
+
+                        Preferences.get(mContext.get()).setRatingHint(false);
                     }
                     cancel(true);
                 });

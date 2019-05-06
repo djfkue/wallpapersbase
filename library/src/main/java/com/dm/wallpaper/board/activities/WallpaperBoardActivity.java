@@ -24,6 +24,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatRatingBar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,6 +59,7 @@ import com.dm.wallpaper.board.fragments.dialogs.InAppBillingFragment;
 import com.dm.wallpaper.board.helpers.BackupHelper;
 import com.dm.wallpaper.board.helpers.LicenseCallbackHelper;
 import com.dm.wallpaper.board.helpers.LocaleHelper;
+import com.dm.wallpaper.board.helpers.TypefaceHelper;
 import com.dm.wallpaper.board.items.InAppBilling;
 import com.dm.wallpaper.board.preferences.Preferences;
 import com.dm.wallpaper.board.services.WallpaperBoardService;
@@ -217,6 +219,10 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
             Preferences.get(this).setPreviousBackupExist(file.exists());
         }
 
+        if (!Preferences.get(this).isFirstRun()) {
+            showRatingDialog(this);
+        }
+
         if (Preferences.get(this).isFirstRun() && mConfig.isLicenseCheckerEnabled()) {
             mLicenseHelper = new LicenseHelper(this);
             mLicenseHelper.run(mConfig.getLicenseKey(),
@@ -233,7 +239,7 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
             finish();
         }
 
-         OneSignal.startInit(this)
+        OneSignal.startInit(this)
                 .setNotificationReceivedHandler(new ExampleNotificationReceivedHandler())
                 .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
                 .unsubscribeWhenNotificationsAreDisabled(true)
@@ -253,6 +259,36 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
 
         OneSignal.clearOneSignalNotifications();
 
+    }
+
+    private void showRatingDialog(Context context) {
+        if (!Preferences.get(context).showRatingHint()) {
+            return;
+        }
+        final MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
+        builder.widgetColor(ColorHelper.getAttributeColor(context, R.attr.colorAccent))
+                .typeface(TypefaceHelper.getMedium(context), TypefaceHelper.getRegular(context))
+                .cancelable(true)
+                .customView(R.layout.dialog_customer_rating, true)
+                .title(R.string.rate_hint)
+                .negativeColor(Color.WHITE)
+                .negativeText(android.R.string.cancel)
+                .onNegative((dialog, which) -> {
+                })
+                .positiveColor(ColorHelper.getAttributeColor(context, R.attr.colorAccent))
+                .positiveText(android.R.string.ok)
+                .onPositive((dialog, which) -> {
+                    AppCompatRatingBar ratingBar = dialog.getCustomView().findViewById(R.id.item_rating_bar);
+                    if (ratingBar.getRating() > 4.0) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+                                "https://play.google.com/store/apps/details?id=" + context.getPackageName()));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+                        context.startActivity(intent);
+
+                        Preferences.get(context).setRatingHint(false);
+                    }
+                });
+        builder.build().show();
     }
 
     class ExampleNotificationReceivedHandler implements OneSignal.NotificationReceivedHandler {
@@ -470,13 +506,13 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
                         getResources().getString(R.string.app_name)));
                 intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.share_app_body,
                         getResources().getString(R.string.app_name),
-                        "https://play.google.com/store/apps/details?id=" +getPackageName()));
+                        "https://play.google.com/store/apps/details?id=" + getPackageName()));
                 startActivity(Intent.createChooser(intent, getResources().getString(R.string.email_client)));
                 return false;
 
             } else if (id == R.id.navigation_view_rate) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(
-                        "https://play.google.com/store/apps/details?id=" +getPackageName()));
+                        "https://play.google.com/store/apps/details?id=" + getPackageName()));
                 intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
                 startActivity(intent);
                 return false;
@@ -518,7 +554,8 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
                 String versionText = "v" + getPackageManager()
                         .getPackageInfo(getPackageName(), 0).versionName;
                 version.setText(versionText);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
 
         if (ColorHelper.isValidColor(imageUrl)) {
@@ -570,18 +607,17 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
         mNavigationView.getMenu().getItem(mPosition).setChecked(true);
     }
 
-      private void startHandler()
-    {
+    private void startHandler() {
         Handler handler = new Handler();
 
-        handler.postDelayed(new Runnable(){
+        handler.postDelayed(new Runnable() {
             public void run() {
                 adblockcheck();
-            }}, 2000);
+            }
+        }, 2000);
     }
 
-    private void loadInterstitial()
-    {
+    private void loadInterstitial() {
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice((getString(R.string.admob_testdevice_id)))
                 .build();
@@ -593,46 +629,40 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
         BufferedReader in = null;
         boolean result = true;
 
-        try
-        {
+        try {
             in = new BufferedReader(new InputStreamReader(
                     new FileInputStream("/etc/hosts")));
             String line;
 
-            while ((line = in.readLine()) != null)
-            {
-                if (line.contains("admob"))
-                {
+            while ((line = in.readLine()) != null) {
+                if (line.contains("admob")) {
                     result = false;
                     break;
                 }
             }
-        } catch (UnknownHostException e) { }
-        catch (IOException e) {e.printStackTrace();}
+        } catch (UnknownHostException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        if(result==false){
+        if (result == false) {
             adBlockDialog();
         }
     }
 
-    public void checkAdBlocker()
-    {
+    public void checkAdBlocker() {
         // Asynchronous detection in a background thread
-        new AdBlockerDetector(this).detectAdBlockers(new Constants.AdBlockerCallback()
-        {
+        new AdBlockerDetector(this).detectAdBlockers(new Constants.AdBlockerCallback() {
             @Override
-            public void onResult(boolean adBlockerFound, Constants.Info info)
-            {
-                if(adBlockerFound)
-                {
+            public void onResult(boolean adBlockerFound, Constants.Info info) {
+                if (adBlockerFound) {
                     adBlockDialog();
                 }
             }
         });
     }
 
-    public void adBlockDialog()
-    {
+    public void adBlockDialog() {
         new MaterialStyledDialog.Builder(this)
                 .setTitle(R.string.dialog_title_adblock)
                 .setDescription(R.string.dialog_content_adblock)
@@ -645,7 +675,7 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-                        homeIntent.addCategory( Intent.CATEGORY_HOME );
+                        homeIntent.addCategory(Intent.CATEGORY_HOME);
                         homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(homeIntent);
                         finish();
@@ -656,7 +686,7 @@ public abstract class WallpaperBoardActivity extends AppCompatActivity implement
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-                        homeIntent.addCategory( Intent.CATEGORY_HOME );
+                        homeIntent.addCategory(Intent.CATEGORY_HOME);
                         homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(homeIntent);
                         finish();
