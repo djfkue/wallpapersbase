@@ -55,6 +55,7 @@ public class Preferences {
     private static final String KEY_HIGH_QUALITY_PREVIEW = "high_quality_preview";
     private static final String KEY_BACKUP = "backup";
     private static final String KEY_PREVIOUS_BACKUP = "previousBackup";
+    private static final String KEY_RATING_HINT = "rating_hint";
 
     private static WeakReference<Preferences> mPreferences;
     private final Context mContext;
@@ -220,6 +221,14 @@ public class Preferences {
 
     public void setLocaleDefault(boolean bool) {
         getSharedPreferences().edit().putBoolean(KEY_LOCALE_DEFAULT, bool).apply();
+    }
+
+    public boolean showRatingHint() {
+        return getSharedPreferences().getBoolean(KEY_RATING_HINT, true);
+    }
+
+    public void setRatingHint(boolean bool) {
+        getSharedPreferences().edit().putBoolean(KEY_RATING_HINT, bool).apply();
     }
 
     @Nullable
