@@ -123,10 +123,10 @@ public class WallpapersLoaderTask extends AsyncTask<Void, Void, Boolean> {
                             .getConfig().getJsonStructure().getWallpaper();
 
                     // Temp code
-                    InputStream is = mContext.get().getAssets().open("wallpaper_sample.txt");
-                    Log.d("cw","2 is.available = " + is.available());
+//                    InputStream is = mContext.get().getAssets().open("wallpaper_sample.txt");
+//                    Log.d("cw","2 is.available = " + is.available());
 
-                    Map<String, List> map = LoganSquare.parseMap(is, List.class);
+                    Map<String, List> map = LoganSquare.parseMap(stream, List.class);
                     if (map == null) return false;
 
                     stream.close();
